@@ -1,0 +1,10 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+scikit-learn>=1.5
+# CPU-only xgboost in Linux containers (avoids ~300MB CUDA deps); regular xgboost elsewhere.
+xgboost-cpu>=2.1; sys_platform == "linux"
+xgboost>=2.1; sys_platform != "linux"
+pandas>=2.2
+numpy>=1.26
+joblib>=1.4
+pydantic>=2.6

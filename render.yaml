@@ -1,0 +1,16 @@
+# Render Blueprint - deploy with one click from a Git repo.
+# https://render.com/docs/blueprint-spec
+#
+# 1. Push this project to a GitHub repo.
+# 2. In Render: New + -> Blueprint -> pick the repo. Render reads this file.
+# 3. It builds the Dockerfile (which trains the model) and serves the API.
+#
+services:
+  - type: web
+    name: diabetes-predictor
+    runtime: docker
+    plan: free                 # free web service (sleeps when idle)
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health   # Render polls this; must return 200
+    autoDeploy: true           # redeploy on every push to the branch
+    # Render injects PORT automatically; the app binds to it (see Dockerfile CMD).
